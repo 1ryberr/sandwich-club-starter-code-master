@@ -19,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView description;
     TextView alsoKnownAs;
     TextView ingredients;
+    StringBuilder builder = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +47,15 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
             return;
         }
-        ;
-        origin = (TextView)findViewById(R.id.origin_tv);
-        description = (TextView)findViewById(R.id.description_tv);
-        alsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
-        ingredients = (TextView)findViewById(R.id.ingredients_tv);
-        System.out.println( sandwich.getAlsoKnownAs());
-
+        origin = findViewById(R.id.origin_tv);
+        description = findViewById(R.id.description_tv);
+        alsoKnownAs = findViewById(R.id.also_known_tv);
+        ingredients = findViewById(R.id.ingredients_tv);
 
         origin.setText(sandwich.getPlaceOfOrigin());
         description.setText(sandwich.getDescription());
-        //alsoKnownAs.setText(sandwich.getAlsoKnownAs());
-        //ingredients.setText(sandwich.getIngredients());
+
+        listTextView(sandwich, builder);
 
         populateUI();
         Picasso.with(this)
@@ -65,6 +63,18 @@ public class DetailActivity extends AppCompatActivity {
                 .into(ingredientsIv);
 
         setTitle(sandwich.getMainName());
+    }
+
+    private void listTextView(Sandwich sandwich, StringBuilder builder) {
+        for (String details : sandwich.getAlsoKnownAs()) {
+            builder.append(details + " ");
+        }
+        alsoKnownAs.setText(builder.toString());
+
+        for (String details : sandwich.getIngredients()) {
+            builder.append(details + " ");
+        }
+        ingredients.setText(builder.toString());
     }
 
     private void closeOnError() {

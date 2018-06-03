@@ -1,7 +1,5 @@
 package com.udacity.sandwichclub.utils;
 
-import android.media.Image;
-import android.widget.ImageView;
 
 import com.udacity.sandwichclub.model.Sandwich;
 
@@ -42,12 +40,9 @@ public class JsonUtils {
             makeList(alsoKnownAs, alsoList);
 
         } catch (JSONException e) {
-
-
-
+            e.printStackTrace();
 
         }
-
 
        Sandwich myLunch = new Sandwich(mainName,alsoList,placeOfOrigin,description,image,ingList);
 
