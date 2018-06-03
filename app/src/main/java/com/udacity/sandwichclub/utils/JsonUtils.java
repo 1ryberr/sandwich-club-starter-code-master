@@ -38,18 +38,8 @@ public class JsonUtils {
             description = sandwich.getString("description");
             image = sandwich.getString("image");
             ingredients = sandwich.getJSONArray( "ingredients" );
-
-            if (ingredients != null) {
-                for (int i=0;i<ingredients.length();i++){
-                    ingList.add(ingredients.getString(i));
-                }
-            }
-
-            if (alsoKnownAs != null) {
-                for (int i=0;i<alsoKnownAs.length();i++){
-                    alsoList.add(alsoKnownAs.getString(i));
-                }
-            }
+            makeList(ingredients, ingList);
+            makeList(alsoKnownAs, alsoList);
 
         } catch (JSONException e) {
 
@@ -63,5 +53,13 @@ public class JsonUtils {
 
 
         return myLunch;
+    }
+
+    private static void makeList(JSONArray jsonArray, List<String> ingList) throws JSONException {
+        if (jsonArray != null) {
+            for (int i=0;i<jsonArray.length();i++){
+                ingList.add(jsonArray.getString(i));
+            }
+        }
     }
 }

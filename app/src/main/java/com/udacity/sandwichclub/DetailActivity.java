@@ -17,6 +17,8 @@ public class DetailActivity extends AppCompatActivity {
     private static final int DEFAULT_POSITION = -1;
     TextView origin;
     TextView description;
+    TextView alsoKnownAs;
+    TextView ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,18 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
             return;
         }
-        System.out.println(sandwich.getPlaceOfOrigin());
+        ;
         origin = (TextView)findViewById(R.id.origin_tv);
         description = (TextView)findViewById(R.id.description_tv);
+        alsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
+        ingredients = (TextView)findViewById(R.id.ingredients_tv);
+        System.out.println( sandwich.getAlsoKnownAs());
+
 
         origin.setText(sandwich.getPlaceOfOrigin());
         description.setText(sandwich.getDescription());
+        //alsoKnownAs.setText(sandwich.getAlsoKnownAs());
+        //ingredients.setText(sandwich.getIngredients());
 
         populateUI();
         Picasso.with(this)
